@@ -1,3 +1,63 @@
+class Solution {
+    public boolean isOneEditDistance(String s, String t) {
+        
+        String shorter;
+        String longer;
+        if (s.length() > t.length()) {
+            longer = s;
+            shorter = t;
+        } else {
+            longer = t;
+            shorter = s;
+        }
+        
+        return hasOneDeletion(shorter, longer) || hasOneReplace(shorter, longer);
+    }
+    
+    
+    public boolean hasOneDeletion(String shorter, String longer) {
+        if (shorter.length() + 1 != longer.length()) {
+            return false;
+        }
+        
+        int shorterPointer = 0;
+        int longerPointer = 0;
+        
+        
+        while (shorterPointer < shorter.length() && longerPointer < longer.length()) {
+            
+            if (shorter.charAt(shorterPointer) == longer.charAt(longerPointer)) {
+                shorterPointer++;
+            }
+            longerPointer++;
+        }
+        
+        
+        return shorterPointer == longerPointer - 1 || longer.length() - longerPointer == 1;
+    }
+    
+    
+    public boolean hasOneReplace(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        boolean hasOneReplace = false;
+        for (int i = 0;i < s.length();i++) {
+            if (s.charAt(i) != t.charAt(i)) {
+                if (hasOneReplace) {
+                    return false;
+                }
+                hasOneReplace = true;
+            }            
+        }
+        
+        
+        return hasOneReplace;
+    }
+}
+
+
 //https://www.lintcode.com/problem/640/
 
 public class Solution {
