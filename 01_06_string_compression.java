@@ -34,3 +34,42 @@ class Solution {
         return p;
     }
 }
+
+
+class Solution {
+    public int compress(char[] chars) {
+        if (chars.length == 0) {
+            return 0;
+        }
+      
+        int count = 1;
+        int outputIndex = 0;
+        
+        
+        for (int i = 1;i <= chars.length;i++) {
+            
+            if (i != 0 && i != chars.length && chars[i] == chars[i - 1]) {
+                count++;
+            } else {
+                chars[outputIndex] = chars[i - 1];
+                outputIndex++;
+                
+                if (count > 1) {
+                    String digitsAsString = count + "";
+                    
+                    for (char digit : digitsAsString.toCharArray()) {
+                        chars[outputIndex] = digit;
+                        outputIndex++;
+                    }
+                }
+                
+                
+                count = 1;
+            }
+        }
+        
+        return outputIndex;
+    }
+}
+
+
