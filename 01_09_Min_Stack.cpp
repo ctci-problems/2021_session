@@ -1,5 +1,9 @@
 class MinStack {
 public:
+    vector<pair<int,int>> s;
+    MinStack() {
+        s.clear();
+    }
 
     void push(int val) {
         if (s.size() == 0) s.push_back({val, val});
