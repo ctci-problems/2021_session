@@ -5,18 +5,18 @@ class MyQueue:
         self.secondStack = [ ]
 
     def push(self, x) -> None:
-        while self.firstStack:
-            self.secondStack.append(self.firstStack.pop())
         self.firstStack.append(x)
-        while self.secondStack:
-            self.firstStack.append(self.secondStack.pop())
-    def pop(self):
-        return self.firstStack.pop()
         
+    def pop(self):
+        self.peek()
+        return self.secondStack.pop()   
 
     def peek(self):
-        return self.firstStack[-1]
+        if not self.secondStack:
+            while self.firstStack:
+                self.secondStack.append(self.firstStack.pop())
+        return self.secondStack[-1]
         
     def empty(self):
-        return not self.firstStack
-        
+        return not self.firstStack and not self.secondStack
+    
