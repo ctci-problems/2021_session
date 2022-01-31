@@ -128,3 +128,50 @@ class Solution {
     }
 }
 
+// Union Find
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        
+        int[] weight = new int[n];
+        int[] unionFind = new int[n];
+        
+        for (int i = 0;i < unionFind.length;i++) {
+            unionFind[i] = i;
+            weight[i] = 1;
+        }
+        
+        for (int i = 0;i < edges.length;i++) {
+            connect(unionFind, weight, edges[i][0], edges[i][1]);
+        }
+        
+        return find(unionFind, source) == find(unionFind, destination);
+    }
+    
+    public static int find(int[] unionFind, int target) {
+        int root = target;
+        while (unionFind[root] != root) {
+            root = unionFind[root];
+            
+        }
+        return root;
+    }
+    
+    public static void connect(int[] unionFind, int[] weight, int nodeOne, int nodeTwo) {
+        
+        int nodeOneRoot = find(unionFind, nodeOne);
+        int nodeTwoRoot = find(unionFind, nodeTwo);
+        
+        if (nodeOneRoot == nodeTwoRoot) {
+            return;
+        }
+        
+        if (weight[nodeOneRoot] < weight[nodeTwoRoot]) {
+            unionFind[nodeOneRoot] = nodeTwoRoot;
+            weight[nodeTwoRoot] += weight[nodeOneRoot]; 
+        } else {
+            unionFind[nodeTwoRoot] = nodeOneRoot;
+            weight[nodeOneRoot] += weight[nodeTwoRoot];
+        }
+    }
+}
+
