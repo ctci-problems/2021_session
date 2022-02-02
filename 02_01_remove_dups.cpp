@@ -1,23 +1,34 @@
-// This problem is different the coding problem https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/
 class Solution {
-  public:
-    ListNode * removeDuplicates(ListNode * head) {
-      auto * current = head;
-      if (current != nullptr) {
-        set < int > duplicateNodes;
-        duplicateNodes.insert(current -> val);
+public:
+    ListNode * deleteDuplicatesUnsorted(ListNode * head) {
 
-        while (current -> next != nullptr) {
-          if (duplicateNodes.find(current -> next -> val) != duplicateNodes.end()) {
-            current -> next = current -> next -> next;
-          } else {
-            duplicateNodes.insert(current -> next -> val);
-            current = current -> next;
-          }
+        auto dummyHead = new ListNode(0); dummyHead->next = head;
+        auto * p1 = head, * p2 = dummyHead;
 
+        map < int, int > duplicateNodes;
+
+        if ((p1 != nullptr) && (p1->next != nullptr))
+        {
+            while(p1 != nullptr)
+            {
+                duplicateNodes[p1 -> val]++;
+                p1 = p1->next;
+            }
+            
+            for(p1 = head; p1 != nullptr; p1 = p1->next) 
+            {                    
+                if (duplicateNodes[p1->val] == 1) 
+                {
+                    p2 -> next = p1;
+                    p2 = p2->next;
+                }
+            }
+            
+            p2->next = nullptr;
+            
+            return dummyHead->next;
         }
-      }
 
-      return head;
+        else return head;
     }
 };
