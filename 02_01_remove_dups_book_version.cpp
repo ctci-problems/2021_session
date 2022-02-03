@@ -1,4 +1,3 @@
-// This problem is different the coding problem https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/
 class Solution {
   public:
     ListNode * removeDuplicates(ListNode * head) {
