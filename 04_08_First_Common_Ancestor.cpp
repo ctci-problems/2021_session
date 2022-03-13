@@ -5,7 +5,7 @@ public:
         if (root == nullptr)
             return root;
         
-        if ((root == p) or ((root == q))
+        if ((root == p) or (root == q))
             return root;
         
         auto * left = lowestCommonAncestor(root->left, p, q);
