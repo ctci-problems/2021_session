@@ -10,5 +10,4 @@
             s.add(nums[i])
     }
     return false
-    console.log(nums)
 };
