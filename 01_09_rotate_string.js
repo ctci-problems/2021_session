@@ -26,9 +26,3 @@
 };
 
 
-
-
-let test = 'abcde'
-let test1 ='cdeab'
-
-rotateString(test, test1)
